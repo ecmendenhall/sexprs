@@ -1,9 +1,13 @@
 (ns sexprs.wrappers  
-  (:use-macros [s-express.macros :only [js-alias]]))
+  (:use-macros [sexprs.macros :only [js-alias js-property]]))
 
 ;;;;;;;;;;;;;;;;;;;
 ;; Application
 ;;;;;;;;;;;;;;;;;;;
+
+(defn express []
+  (let [express (js/require "express")]
+    (express)))
 
 (js-alias 
   "app.set(name, value)
@@ -39,7 +43,9 @@
   "app.use([path], function)"
   use)
 
-;; TK: settings
+(js-property
+  "app.settings"
+  settings)
 
 (js-alias
   "app.engine(ext, callback)"
@@ -67,7 +73,7 @@
 
 (js-alias
   "app.delete(path, [callback...], callback)"
-  (delete DELETE))
+  delete DELETE)
 
 (js-alias
   "app.trace(path, [callback...], callback)"
@@ -98,7 +104,9 @@
    res.render(view,  [locals], callback)"
   render)
 
-;; TK: app.routes
+(js-property
+  "app.routes"
+  routes)
 
 (js-alias
   "app.listen()"
@@ -108,23 +116,37 @@
 ;; Request
 ;;;;;;;;;;;;;;;;;;;
 
-;; TK: req.params
-;;
-;; TK: req.query
-;;
-;; TK: req.body
-;;
-;; TK: req.files
+(js-property
+  "req.params"
+  params)
+
+(js-property
+  "req.query"
+  query)
+
+(js-property
+  "req.body"
+  body)
+
+(js-property
+  "req.files"
+  files)
 
 (js-alias
   "req.param(name)"
   param)
 
-;; TK: req.route
-;;
-;; TK: req.cookies
-;;
-;; TK: req.signedCookies
+(js-property
+  "req.route"
+  route)
+
+(js-property
+  "req.cookies"
+  cookies)
+
+(js-property
+  "req.signedCookies"
+  signedCookies signed-cookies)
 
 (js-alias
   "req.get(field)"
@@ -134,35 +156,61 @@
   "req.accepts(types)"
   accepts)
 
-;; TK: req.accepted
+(js-property
+  "req.accepted"
+  accepted)
 
 (js-alias
   "req.is(type)"
   is)
 
-;; TK: req.ip
-;;
-;; TK: req.ips
-;;
-;; TK: req.path
-;;
-;; TK: req.fresh
-;;
-;; TK: req.stale
-;;
-;; TK: req.xhr
-;;
-;; TK: req.protocol
-;;
-;; TK: req.secure
-;;
-;; TK: req.subdomains
-;;
-;; TK: req.originalUrl
-;;
-;; TK: req.acceptedLanguages
-;;
-;; TK: req.acceptedCharsets
+(js-property
+  "req.ip"
+  ip)
+
+(js-property
+  "req.ips"
+  ips)
+
+(js-property
+  "req.path"
+  path)
+
+(js-property
+  "req.fresh"
+  fresh)
+
+(js-property
+  "req.stale"
+  stale)
+
+(js-property
+  "req.xhr"
+  xhr)
+
+(js-property
+  "req.protocol"
+  protocol)
+
+(js-property
+  "req.secure"
+  secure)
+
+(js-property
+  "req.subdomains"
+  subdomains)
+
+(js-property
+  "req.originalUrl"
+  originalUrl original-url)
+
+(js-property
+  "req.acceptedLanguages"
+  acceptedLanguages accepted-languages)
+
+(js-property
+  "req.acceptedCharsets"
+  acceptedCharsets accepted-charsets)
 
 (js-alias
   "req.acceptsCharset(charset)"
@@ -172,7 +220,9 @@
   "req.acceptsLanguage(lang)"
   acceptsLanguage accepts-language)
 
+;;;;;;;;;;;;;;;;;;;
 ;; Response
+;;;;;;;;;;;;;;;;;;;
 
 (js-alias
   "res.status(code)"
@@ -190,8 +240,13 @@
   "res.redirect([status], url)"
   redirect)
 
-;; TK: res.location
-;; TK: res.charset
+(js-property
+  "res.location"
+  location)
+
+(js-property
+  "rex.charset"
+  charset)
 
 (js-alias
   "res.send([body|status], [body])"
@@ -229,7 +284,9 @@
   "res.links(links)"
   links)
 
-;; TK: res.locals
+(js-property
+  "res.locals"
+  locals)
 
 ;;;;;;;;;;;;;;;;;;;
 ;; Middleware
