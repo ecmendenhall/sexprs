@@ -14,6 +14,11 @@
   (let [express (js/require "express")]
     (express)))
 
+;; FIXME: http://bit.ly/WTaL5g
+;(defn static [directory]
+;  (let [express (js/require "express")]
+;  (.static express (str js/__dirname directory))))
+
 (js-alias 
   "app.set(name, value)
    res.set(field, [value])" 
@@ -46,7 +51,7 @@
 
 (js-alias
   "app.use([path], function)"
-  use)
+  use use-middleware)
 
 (js-property
   "app.settings"

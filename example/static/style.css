@@ -1,0 +1,28 @@
+body { 
+    margin-left: 20%;
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    font-color: #222
+}
+h1 {
+    font-size: 72px;
+    margin-bottom: 0px;
+}
+h2 { 
+    font-weight: 100;
+    letter-spacing: 2px;
+    color: #aaa;
+    margin-top: 0px;
+    padding-left: 32px;
+}
+
+h2 a { color: #aaa; }
+h2 a:active { color: #aaa; }
+h2 a:visited { color: #aaa; }
+#close { 
+    position: absolute;
+    bottom: 556px;
+    left: 824px;
+    margin-bottom: 0px;
+    clear: both;
+}
+

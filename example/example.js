@@ -12482,6 +12482,10 @@ cljs.core.UUID.prototype.toString = function() {
   return cljs.core.pr_str.call(null, this)
 };
 var sexprs = {wrappers:{}};
+sexprs.wrappers.signedCookies = void 0;
+sexprs.wrappers.originalUrl = void 0;
+sexprs.wrappers.acceptedLanguages = void 0;
+sexprs.wrappers.acceptedCharsets = void 0;
 sexprs.wrappers.express = function() {
   return require("express").call(null)
 };
@@ -12681,7 +12685,7 @@ sexprs.wrappers.configure = function() {
   };
   return a
 }();
-sexprs.wrappers.use = function() {
+sexprs.wrappers.use_middleware = function() {
   var a = null, b = function(a) {
     return a.use()
   }, a = function(a, d, e, f) {
@@ -13879,6 +13883,183 @@ sexprs.wrappers.directory = function() {
   };
   return a
 }();
+var clojure = {string:{}};
+clojure.string.seq_reverse = function(a) {
+  return cljs.core.reduce.call(null, cljs.core.conj, cljs.core.List.EMPTY, a)
+};
+clojure.string.reverse = function(a) {
+  return a.split("").reverse().join("")
+};
+clojure.string.replace = function(a, b, c) {
+  if(cljs.core.string_QMARK_.call(null, b)) {
+    return a.replace(RegExp(goog.string.regExpEscape(b), "g"), c)
+  }
+  if(cljs.core.truth_(b.hasOwnProperty("source"))) {
+    return a.replace(RegExp(b.source, "g"), c)
+  }
+  throw[cljs.core.str("Invalid match arg: "), cljs.core.str(b)].join("");
+};
+clojure.string.replace_first = function(a, b, c) {
+  return a.replace(b, c)
+};
+clojure.string.join = function() {
+  var a = null, b = function(a) {
+    return cljs.core.apply.call(null, cljs.core.str, a)
+  }, c = function(a, b) {
+    return cljs.core.apply.call(null, cljs.core.str, cljs.core.interpose.call(null, a, b))
+  }, a = function(a, e) {
+    switch(arguments.length) {
+      case 1:
+        return b.call(this, a);
+      case 2:
+        return c.call(this, a, e)
+    }
+    throw Error("Invalid arity: " + arguments.length);
+  };
+  a.cljs$lang$arity$1 = b;
+  a.cljs$lang$arity$2 = c;
+  return a
+}();
+clojure.string.upper_case = function(a) {
+  return a.toUpperCase()
+};
+clojure.string.lower_case = function(a) {
+  return a.toLowerCase()
+};
+clojure.string.capitalize = function(a) {
+  return 2 > cljs.core.count.call(null, a) ? clojure.string.upper_case.call(null, a) : [cljs.core.str(clojure.string.upper_case.call(null, cljs.core.subs.call(null, a, 0, 1))), cljs.core.str(clojure.string.lower_case.call(null, cljs.core.subs.call(null, a, 1)))].join("")
+};
+clojure.string.split = function() {
+  var a = null, b = function(a, b) {
+    return cljs.core.vec.call(null, ("" + cljs.core.str(a)).split(b))
+  }, c = function(a, b, c) {
+    if(1 > c) {
+      return cljs.core.vec.call(null, ("" + cljs.core.str(a)).split(b))
+    }
+    for(var g = cljs.core.PersistentVector.EMPTY;;) {
+      if(cljs.core._EQ_.call(null, c, 1)) {
+        return cljs.core.conj.call(null, g, a)
+      }
+      var h = cljs.core.re_find.call(null, b, a);
+      if(cljs.core.truth_(h)) {
+        var i = h, h = a.indexOf(i), i = a.substring(h + cljs.core.count.call(null, i)), c = c - 1, g = cljs.core.conj.call(null, g, a.substring(0, h)), a = i
+      }else {
+        return cljs.core.conj.call(null, g, a)
+      }
+    }
+  }, a = function(a, e, f) {
+    switch(arguments.length) {
+      case 2:
+        return b.call(this, a, e);
+      case 3:
+        return c.call(this, a, e, f)
+    }
+    throw Error("Invalid arity: " + arguments.length);
+  };
+  a.cljs$lang$arity$2 = b;
+  a.cljs$lang$arity$3 = c;
+  return a
+}();
+clojure.string.split_lines = function(a) {
+  return clojure.string.split.call(null, a, /\n|\r\n/)
+};
+clojure.string.trim = function(a) {
+  return goog.string.trim(a)
+};
+clojure.string.triml = function(a) {
+  return goog.string.trimLeft(a)
+};
+clojure.string.trimr = function(a) {
+  return goog.string.trimRight(a)
+};
+clojure.string.trim_newline = function(a) {
+  for(var b = a.length;;) {
+    if(0 === b) {
+      return""
+    }
+    var c = cljs.core._lookup.call(null, a, b - 1, null);
+    var d = cljs.core._EQ_.call(null, c, "\n"), c = d ? d : cljs.core._EQ_.call(null, c, "\r");
+    if(c) {
+      b -= 1
+    }else {
+      return a.substring(0, b)
+    }
+  }
+};
+clojure.string.blank_QMARK_ = function(a) {
+  return goog.string.isEmptySafe(a)
+};
+clojure.string.escape = function(a, b) {
+  for(var c = new goog.string.StringBuffer, d = a.length, e = 0;;) {
+    if(cljs.core._EQ_.call(null, d, e)) {
+      return c.toString()
+    }
+    var f = a.charAt(e), g = cljs.core._lookup.call(null, b, f, null);
+    cljs.core.truth_(g) ? c.append("" + cljs.core.str(g)) : c.append(f);
+    e += 1
+  }
+};
+var hiccups = {runtime:{}};
+hiccups.runtime.re_tag = /([^\s\.#]+)(?:#([^\s\.#]+))?(?:\.([^\s#]+))?/;
+hiccups.runtime.character_escapes = cljs.core.PersistentArrayMap.fromArrays(["&", "<", ">", '"'], ["&amp;", "&lt;", "&gt;", "&quot;"]);
+hiccups.runtime.container_tags = cljs.core.PersistentHashSet.fromArray("dd head a b body pre form iframe dl em fieldset i h1 h2 span h3 script html h4 h5 h6 table dt div style label option ul strong canvas textarea li ol".split(" "));
+hiccups.runtime.as_str = function(a) {
+  var b;
+  b = (b = cljs.core.keyword_QMARK_.call(null, a)) ? b : cljs.core.symbol_QMARK_.call(null, a);
+  return b ? cljs.core.name.call(null, a) : "" + cljs.core.str(a)
+};
+hiccups.runtime._STAR_html_mode_STAR_ = "\ufdd0'xml";
+hiccups.runtime.xml_mode_QMARK_ = function() {
+  return cljs.core._EQ_.call(null, hiccups.runtime._STAR_html_mode_STAR_, "\ufdd0'xml")
+};
+hiccups.runtime.in_mode = function(a, b) {
+  var c = hiccups.runtime._STAR_html_mode_STAR_;
+  try {
+    return hiccups.runtime._STAR_html_mode_STAR_ = a, b.call(null)
+  }finally {
+    hiccups.runtime._STAR_html_mode_STAR_ = c
+  }
+};
+hiccups.runtime.escape_html = function(a) {
+  return clojure.string.escape.call(null, hiccups.runtime.as_str.call(null, a), hiccups.runtime.character_escapes)
+};
+hiccups.runtime.h = hiccups.runtime.escape_html;
+hiccups.runtime.end_tag = function() {
+  return cljs.core.truth_(hiccups.runtime.xml_mode_QMARK_.call(null)) ? " />" : ">"
+};
+hiccups.runtime.xml_attribute = function(a, b) {
+  return[cljs.core.str(" "), cljs.core.str(hiccups.runtime.as_str.call(null, a)), cljs.core.str('="'), cljs.core.str(hiccups.runtime.escape_html.call(null, b)), cljs.core.str('"')].join("")
+};
+hiccups.runtime.render_attribute = function(a) {
+  var b = cljs.core.nth.call(null, a, 0, null), a = cljs.core.nth.call(null, a, 1, null);
+  return!0 === a ? cljs.core.truth_(hiccups.runtime.xml_mode_QMARK_.call(null)) ? hiccups.runtime.xml_attribute.call(null, b, b) : [cljs.core.str(" "), cljs.core.str(hiccups.runtime.as_str.call(null, b))].join("") : cljs.core.not.call(null, a) ? "" : hiccups.runtime.xml_attribute.call(null, b, a)
+};
+hiccups.runtime.render_attr_map = function(a) {
+  return cljs.core.apply.call(null, cljs.core.str, cljs.core.sort.call(null, cljs.core.map.call(null, hiccups.runtime.render_attribute, a)))
+};
+hiccups.runtime.normalize_element = function(a) {
+  var b = cljs.core.nth.call(null, a, 0, null), a = cljs.core.nthnext.call(null, a, 1), c;
+  c = cljs.core.keyword_QMARK_.call(null, b);
+  c || (c = (c = cljs.core.symbol_QMARK_.call(null, b)) ? c : cljs.core.string_QMARK_.call(null, b));
+  if(!c) {
+    throw[cljs.core.str(b), cljs.core.str(" is not a valid tag name")].join("");
+  }
+  var d = cljs.core.re_matches.call(null, hiccups.runtime.re_tag, hiccups.runtime.as_str.call(null, b));
+  cljs.core.nth.call(null, d, 0, null);
+  b = cljs.core.nth.call(null, d, 1, null);
+  c = cljs.core.nth.call(null, d, 2, null);
+  d = cljs.core.nth.call(null, d, 3, null);
+  c = cljs.core.ObjMap.fromObject(["\ufdd0'id", "\ufdd0'class"], {"\ufdd0'id":c, "\ufdd0'class":cljs.core.truth_(d) ? d.replace(".", " ") : null});
+  d = cljs.core.first.call(null, a);
+  return cljs.core.map_QMARK_.call(null, d) ? cljs.core.PersistentVector.fromArray([b, cljs.core.merge.call(null, c, d), cljs.core.next.call(null, a)], !0) : cljs.core.PersistentVector.fromArray([b, c, a], !0)
+};
+hiccups.runtime.render_element = function(a) {
+  var b = hiccups.runtime.normalize_element.call(null, a), a = cljs.core.nth.call(null, b, 0, null), c = cljs.core.nth.call(null, b, 1, null), b = cljs.core.nth.call(null, b, 2, null);
+  return cljs.core.truth_(cljs.core.truth_(b) ? b : hiccups.runtime.container_tags.call(null, a)) ? [cljs.core.str("<"), cljs.core.str(a), cljs.core.str(hiccups.runtime.render_attr_map.call(null, c)), cljs.core.str(">"), cljs.core.str(hiccups.runtime.render_html.call(null, b)), cljs.core.str("</"), cljs.core.str(a), cljs.core.str(">")].join("") : [cljs.core.str("<"), cljs.core.str(a), cljs.core.str(hiccups.runtime.render_attr_map.call(null, c)), cljs.core.str(hiccups.runtime.end_tag.call(null))].join("")
+};
+hiccups.runtime.render_html = function render_html(b) {
+  return cljs.core.vector_QMARK_.call(null, b) ? hiccups.runtime.render_element.call(null, b) : cljs.core.seq_QMARK_.call(null, b) ? cljs.core.apply.call(null, cljs.core.str, cljs.core.map.call(null, render_html, b)) : hiccups.runtime.as_str.call(null, b)
+};
 sexprs.core = {};
 sexprs.core.hello = function(a, b) {
   return sexprs.wrappers.send.call(null, b, "HELLO WORLD!")
@@ -13889,13 +14070,39 @@ sexprs.wrappers.GET.call(null, sexprs.core.helloworld, "/", sexprs.core.hello);
 sexprs.wrappers.listen.call(null, sexprs.core.helloworld, 3E3);
 sexprs.example = {};
 sexprs.example.core = {};
-sexprs.example.core.say_hi = function(a, b) {
-  return sexprs.wrappers.send.call(null, b, "Hello world!")
+sexprs.example.core.template = function() {
+  return"" + cljs.core.str('<html><head><link href="/static/style.css" rel="stylesheet" /><title>sexprs</title></head><body><h1>(sexprs</h1><h2>(a lightweight clojurescript wrapper for <a href="http://expressjs.com/">express</a>)</h2><h1 id="close">)</h1><iframe frameborder="0" height="450" src="http://www.youtube.com/embed/NGbUOlTLzqk" width="600"></iframe></body></html>')
 };
-sexprs.example.core.express__2894__auto__ = require("express");
-sexprs.example.core.hello = sexprs.example.core.express__2894__auto__.call(null);
-sexprs.wrappers.GET.call(null, sexprs.example.core.hello, "/", sexprs.example.core.say_hi);
-sexprs.wrappers.listen.call(null, sexprs.example.core.hello, 1337);
+sexprs.example.core.main_handler = function(a, b) {
+  console.log([cljs.core.str(a.method), cljs.core.str("  "), cljs.core.str(a.url)].join(""));
+  return sexprs.wrappers.send.call(null, b, sexprs.example.core.template.call(null))
+};
+sexprs.example.core.send_file = function(a, b) {
+  var c = a.params.file;
+  return b.sendfile([cljs.core.str(__dirname), cljs.core.str("/static/"), cljs.core.str(c)].join(""))
+};
+sexprs.example.core.express__2864__auto__ = require("express");
+sexprs.example.core.example = sexprs.example.core.express__2864__auto__.call(null);
+sexprs.wrappers.GET.call(null, sexprs.wrappers.GET.call(null, sexprs.example.core.example, "/", sexprs.example.core.main_handler), "/static/:file", sexprs.example.core.send_file);
+sexprs.example.core.run_server = function() {
+  for(;;) {
+    sexprs.example.core.get_port = function() {
+      return 3E3 + cljs.core.rand_int.call(null, 2E3)
+    };
+    try {
+      var a = sexprs.example.core.get_port.call(null);
+      sexprs.wrappers.listen.call(null, sexprs.example.core.example, a);
+      return console.log([cljs.core.str("Node server listening on port "), cljs.core.str(a)].join(""))
+    }catch(b) {
+      if(cljs.core.instance_QMARK_.call(null, Object, b)) {
+        console.log(b)
+      }else {
+        throw b;
+      }
+    }
+  }
+};
+sexprs.example.core.run_server.call(null);
 sexprs.utilities = {};
 sexprs.utilities.clj__GT_js = function clj__GT_js(b) {
   return cljs.core.string_QMARK_.call(null, b) ? b : cljs.core.keyword_QMARK_.call(null, b) ? cljs.core.name.call(null, b) : cljs.core.map_QMARK_.call(null, b) ? cljs.core.reduce.call(null, function(b, d) {
