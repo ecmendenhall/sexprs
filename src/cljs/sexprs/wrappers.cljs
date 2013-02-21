@@ -1,6 +1,11 @@
 (ns sexprs.wrappers  
   (:use-macros [sexprs.macros :only [js-alias js-property]]))
 
+(declare signedCookies)
+(declare originalUrl)
+(declare acceptedLanguages)
+(declare acceptedCharsets)
+
 ;;;;;;;;;;;;;;;;;;;
 ;; Application
 ;;;;;;;;;;;;;;;;;;;
@@ -12,7 +17,7 @@
 (js-alias 
   "app.set(name, value)
    res.set(field, [value])" 
-  set set!)
+  set set-value)
 
 (js-alias
   "app.get(name)
@@ -71,9 +76,9 @@
   "app.put(path, [callback...], callback)"
   put PUT)
 
-(js-alias
-  "app.delete(path, [callback...], callback)"
-  delete DELETE)
+;(js-alias
+;  "app.delete(path, [callback...], callback)"
+;  delete DELETE)
 
 (js-alias
   "app.trace(path, [callback...], callback)"
@@ -95,7 +100,7 @@
   "app.all(path, [callback...], callback)"
   all)
 
-(js-alias
+(js-property
   "app.locals"
   locals)
 

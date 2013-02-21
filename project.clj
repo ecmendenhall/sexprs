@@ -2,11 +2,18 @@
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [org.clojure/clojurescript "0.0-1535"]]
   :plugins [[lein-cljsbuild "0.3.0"]]
-  :source-paths ["src/clj"]
+  :source-paths ["src/clj" "test/clj"]
   :cljsbuild {
-    :builds [{
-      :source-paths ["src/cljs"]
-      :compiler {
-        :output-to "resources/public/sexprs.js"
-        :optimizations :whitespace
-        :pretty-print true}}]})
+    :test-commands {"tests" ["mocha" "test/js/test"]}
+    :builds {
+             :dev {:source-paths ["src/cljs"]
+                   :compiler {
+                     :output-to "resources/public/sexprs.js"
+                     :optimizations :simple
+                     :pretty-print true}}
+
+             :test {:source-paths ["test/cljs"]
+                    :compiler {
+                      :output-to "test/js/test.js"
+                      :optimizations :simple
+                      :pretty-print true}}}})
