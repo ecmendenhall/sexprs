@@ -12,6 +12,12 @@
                      :optimizations :simple
                      :pretty-print true}}
 
+             :app {:source-paths ["example/cljs" "src/cljs"]
+                   :compiler {
+                     :output-to "example/example.js"
+                     :optimizations :simple
+                     :pretty-print true}}
+
              :test {:source-paths ["test/cljs"]
                     :compiler {
                       :output-to "test/js/test.js"
