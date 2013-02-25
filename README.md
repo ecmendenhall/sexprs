@@ -1,5 +1,5 @@
 # sexprs
-|es'ik'spres|
+| es'ik'spres |
 
 A lightweight Clojurescript wrapper for [express](http://expressjs.com/),
 the [node.js](http://nodejs.org/) web framework.
